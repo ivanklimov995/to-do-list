@@ -7,13 +7,27 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextViewDelegate {
 
+    
+    @IBOutlet weak var textView: UITextView!
+    var text = "Введите заметку"
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        textView.delegate = self
+        textView.text = text
+        if text == "Введите заметку"{
+            textView.textColor = UIColor.lightGray
+        }
+       
     }
-
-
+    
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
 }
-
