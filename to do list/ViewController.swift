@@ -12,6 +12,8 @@ class ViewController: UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var textView: UITextView!
     var text = "Введите заметку"
+    var addNotes = true
+    var index: Int?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,7 +23,6 @@ class ViewController: UIViewController, UITextViewDelegate {
             textView.textColor = UIColor.lightGray
         }
     }
-    
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor.lightGray {

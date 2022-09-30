@@ -25,7 +25,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZrQ-aG-vxs">
-                                            <rect key="frame" x="20" y="11" width="42" height="34.333333333333336"/>
+                                            <rect key="frame" x="20.000000000000004" y="11" width="41.333333333333343" height="34.333333333333336"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -44,6 +44,7 @@
                                         </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="HjQ-CG-Hwb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ZrQ-aG-vxs" secondAttribute="trailing" constant="10" id="Fym-z7-Fi5"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="ZrQ-aG-vxs" secondAttribute="bottom" id="GP5-Uw-AZa"/>
                                         <constraint firstItem="HjQ-CG-Hwb" firstAttribute="top" secondItem="5n9-DY-GUV" secondAttribute="top" constant="4" id="VEd-oL-x67"/>
                                         <constraint firstAttribute="bottom" secondItem="HjQ-CG-Hwb" secondAttribute="bottom" constant="4" id="hWc-Tx-Jyx"/>
@@ -150,7 +151,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="lzw-gt-LpL"/>
+        <segue reference="ZlY-UY-lhd"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="star.fill" catalog="system" width="128" height="116"/>

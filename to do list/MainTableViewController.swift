@@ -134,25 +134,47 @@ class MainTableViewController: UITableViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "redactionNotes"{
-            guard let indexPath = tableView.indexPathForSelectedRow else { return}
+            guard let index = tableView.indexPathForSelectedRow else { return}
             let vc = segue.destination as! ViewController
-            vc.text = notesArray[indexPath.row].text
+            vc.addNotes = false
+            vc.index = index.row
+            vc.text = notesArray[index.row].text
         } else  if segue.identifier == "addNotes"{
             let vc = segue.destination as! ViewController
-            
+            vc.addNotes = true
         }
     }
     
     
     @IBAction func unwingSegue( _ segue: UIStoryboardSegue) {
-        guard let redactNotes = segue.source as? ViewController else {return}
-        if redactNotes.textView.text != nil && redactNotes.textView.text != redactNotes.text {
-            notesArray.append(Notes(text: redactNotes.textView.text!))
-            tableView.reloadData()
-        } else {
-            print("text field == nil")
-        }
-        
+        guard let newNotes = segue.source as? ViewController else {return}
+            if newNotes.textView.text != nil && newNotes.textView.text != newNotes.text {
+                if newNotes.addNotes{
+                    notesArray.append(Notes(text: newNotes.textView.text!))
+                }else{
+                    
+                    //фикс форс анрап
+                    notesArray[newNotes.index!].text = newNotes.textView.text!
+                }
+                
+            } else {
+                print("text field == nil")
+            }
+//
+//
+//
+//
+//
+//                if newNotes.addNotes{
+//                    if newNotes.textView.text != nil && newNotes.textView.text != newNotes.text {
+//                        notesArray.append(Notes(text: newNotes.textView.text!))
+//                    } else {
+//                        print("text field == nil")
+//                    }
+//                }else{
+//                    if newNotes
+//                }
+        tableView.reloadData()
     }
 
     //MARK: тест залупа пока нет рабочего рилма
@@ -162,6 +184,7 @@ class MainTableViewController: UITableViewController {
         notesArray.append(Notes(text: "3"))
         notesArray.append(Notes(text: "4"))
         notesArray.append(Notes(text: "5"))
+        notesArray.append(Notes(text: "51фвафафафаьтыжпатофпотловтпаотывпотвптваптвылаптвыльптыбвьптбывтпыпывьпт"))
         notesArray[3].isFavorites = true
     }
 }
