@@ -20,7 +20,6 @@ class ViewController: UIViewController, UITextViewDelegate {
         if text == "Введите заметку"{
             textView.textColor = UIColor.lightGray
         }
-       
     }
     
     

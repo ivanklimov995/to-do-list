@@ -9,43 +9,50 @@ import UIKit
 import Realm
 
 class MainTableViewController: UITableViewController {
+    
     var notesArray = [Notes]()
+    
+    //MARK: все для показа избранных заметок
+    @IBOutlet weak var favoritesOutlet: UIBarButtonItem!
+    var isShowFavorites = false
+    var favoritesArray: [Notes] = []
+    var arrayForShow = [Notes]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         testApprndArray()
-        notesArray[3].isFavorites = true
     }
 
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return notesArray.count
+        if isShowFavorites{
+            return favoritesArray.count
+        }else{
+            return notesArray.count
+        }
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomCell
-        cell.favoritesButton.tag = indexPath.row
-        cell.notesLabel.text = notesArray[indexPath.row].text
-        if notesArray[indexPath.row].isFavorites {
-            cell.addFavorites()
-        } else if notesArray[indexPath.row].isFavorites == false {
-            cell.notFfavorites()
+        if isShowFavorites{
+                arrayForShow = favoritesArray
+            }else{
+                arrayForShow = notesArray
         }
+        
+            if arrayForShow[indexPath.row].isFavorites {
+                cell.addFavorites()
+            } else {
+                cell.notFfavorites()
+            }
+        
+        cell.favoritesButton.tag = indexPath.row
+        cell.notesLabel.text = arrayForShow[indexPath.row].text
+        
         return cell
     }
     
-    func testApprndArray (){
-        notesArray.append(Notes(text: "1"))
-        notesArray.append(Notes(text: "2"))
-        notesArray.append(Notes(text: "3"))
-        notesArray.append(Notes(text: "4"))
-        notesArray.append(Notes(text: "5"))
-    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -85,9 +92,42 @@ class MainTableViewController: UITableViewController {
  
     @IBAction func favoritesButton(_ sender: UIButton) {
         let indexNotes = sender.tag
-        notesArray[indexNotes].isFavorites.toggle()
+        arrayForShow[indexNotes].isFavorites.toggle()
         tableView.reloadData()
     }
+    
+    @IBAction func buttonFavoritesAction(_ sender: UIBarButtonItem) {
+        isShowFavorites.toggle()
+        if isShowFavorites {
+            for notes in notesArray {
+                if notes.isFavorites {
+                    favoritesArray.append(notes)
+                }
+            }
+            if favoritesArray.isEmpty{
+                let alert = UIAlertController(title: "Нет избранных заметок", message: nil, preferredStyle: .alert)
+                let cancel = UIAlertAction(title: "Закрыть", style: .cancel)
+                alert.addAction(cancel)
+                present(alert, animated: true)
+                isShowFavorites.toggle()
+                favoritesOutlet.title = "Показать избранное"
+                favoritesOutlet.tintColor = UIColor.blue
+                tableView.reloadData()
+            }else{
+                favoritesOutlet.title = "Избранное"
+                favoritesOutlet.tintColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+            }
+        } else{
+            favoritesOutlet.title = "Показать избранное"
+            favoritesOutlet.tintColor = UIColor.blue
+            favoritesArray.removeAll()
+        }
+        tableView.reloadData()
+    }
+    
+    
+          
+        
     
     
     
@@ -99,7 +139,7 @@ class MainTableViewController: UITableViewController {
             vc.text = notesArray[indexPath.row].text
         } else  if segue.identifier == "addNotes"{
             let vc = segue.destination as! ViewController
-           
+            
         }
     }
     
@@ -115,4 +155,13 @@ class MainTableViewController: UITableViewController {
         
     }
 
+    //MARK: тест залупа пока нет рабочего рилма
+    func testApprndArray (){
+        notesArray.append(Notes(text: "1"))
+        notesArray.append(Notes(text: "2"))
+        notesArray.append(Notes(text: "3"))
+        notesArray.append(Notes(text: "4"))
+        notesArray.append(Notes(text: "5"))
+        notesArray[3].isFavorites = true
+    }
 }

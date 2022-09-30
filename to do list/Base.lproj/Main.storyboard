@@ -66,6 +66,12 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="7nG-il-LQh">
+                        <barButtonItem key="leftBarButtonItem" title="Показать избранное" style="plain" id="JrJ-Q1-N2H">
+                            <color key="tintColor" systemColor="linkColor"/>
+                            <connections>
+                                <action selector="buttonFavoritesAction:" destination="uLi-rx-A7c" id="YQJ-vB-iXk"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="0SG-f3-Zi6">
                             <connections>
                                 <segue destination="NoL-8e-tFF" kind="show" identifier="addNotes" id="lzw-gt-LpL"/>
@@ -73,6 +79,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="favoritesOutlet" destination="JrJ-Q1-N2H" id="QIg-Kx-LEm"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vgh-a1-awX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -107,7 +116,7 @@
                     <navigationItem key="navigationItem" id="hXo-73-iJy">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="UEO-cy-Uww">
                             <connections>
-                                <segue destination="0PX-Ca-kQU" kind="unwind" unwindAction="unwingSegue:" id="Y64-nv-fCl"/>
+                                <segue destination="0PX-Ca-kQU" kind="unwind" unwindAction="unwingSegue:" id="3d7-sZ-iQz"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -147,6 +156,9 @@
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
