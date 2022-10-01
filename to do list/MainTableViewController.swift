@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Realm
+import RealmSwift
 
 class MainTableViewController: UITableViewController {
     
@@ -151,29 +151,20 @@ class MainTableViewController: UITableViewController {
             if newNotes.textView.text != nil && newNotes.textView.text != newNotes.text {
                 if newNotes.addNotes{
                     notesArray.append(Notes(text: newNotes.textView.text!))
+                    DispatchQueue.main.async {
+                        StoragemManager.saveObject(Notes(text: newNotes.textView.text!))
+                    }
                 }else{
-                    
-                    //фикс форс анрап
-                    notesArray[newNotes.index!].text = newNotes.textView.text!
+                    if newNotes.index != nil {
+                        notesArray[newNotes.index!].text = newNotes.textView.text!
+                        
+                    } else {
+                        print("newNotes.index == nil")
+                    }
                 }
-                
             } else {
                 print("text field == nil")
             }
-//
-//
-//
-//
-//
-//                if newNotes.addNotes{
-//                    if newNotes.textView.text != nil && newNotes.textView.text != newNotes.text {
-//                        notesArray.append(Notes(text: newNotes.textView.text!))
-//                    } else {
-//                        print("text field == nil")
-//                    }
-//                }else{
-//                    if newNotes
-//                }
         tableView.reloadData()
     }
 

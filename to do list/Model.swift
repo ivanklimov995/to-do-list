@@ -9,9 +9,9 @@ import Foundation
 import RealmSwift
 
 class Notes: Object {
-    @objc var text: String = ""
-    @objc var date = Date()
-    @objc var isFavorites = false
+    @objc dynamic var text: String = ""
+    @objc dynamic var date = Date()
+    @objc dynamic var isFavorites = false
     
     convenience init(text: String) {
         self.init()
