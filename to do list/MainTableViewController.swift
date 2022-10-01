@@ -25,6 +25,8 @@ class MainTableViewController: UITableViewController {
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("notes \(notesArray.count)")
+        print("favorites \(favoritesArray?.count)")
         if isShowFavorites{
             return favoritesArray.count
         }else{
@@ -93,11 +95,11 @@ class MainTableViewController: UITableViewController {
                 alert.addAction(cancel)
                 present(alert, animated: true)
                 isShowFavorites.toggle()
-                favoritesOutlet.title = "Показать избранное"
+                favoritesOutlet.title = "Показать избранные"
                 favoritesOutlet.tintColor = UIColor.blue
                 tableView.reloadData()
             }else{
-                favoritesOutlet.title = "Избранное"
+                favoritesOutlet.title = "Показать все"
                 favoritesOutlet.tintColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
             }
         } else{
