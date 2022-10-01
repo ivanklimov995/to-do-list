@@ -8,7 +8,7 @@
 import UIKit
 
 class ViewController: UIViewController, UITextViewDelegate {
-
+//добавить кнопку, чтоб при создании заметки ее сразу можно было добавить в избранное
     
     @IBOutlet weak var textView: UITextView!
     var text = "Введите заметку"

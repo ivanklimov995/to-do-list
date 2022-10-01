@@ -8,7 +8,6 @@
 import Foundation
 import RealmSwift
 
-// чухня, чтобы сохранять в память, чисто логика - по идее можно пиздить и будет везде работать
 
 let realm = try! Realm ()
 
