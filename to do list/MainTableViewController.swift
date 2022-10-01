@@ -25,8 +25,6 @@ class MainTableViewController: UITableViewController {
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("notes \(notesArray.count)")
-        print("favorites \(favoritesArray?.count)")
         if isShowFavorites{
             return favoritesArray.count
         }else{
@@ -63,7 +61,8 @@ class MainTableViewController: UITableViewController {
             let cancel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
             let yes = UIAlertAction(title: "Удалить", style: .destructive) { yes in
                 StoragemManager.deleteObgect(notes)
-                tableView.deleteRows(at: [indexPath], with: .automatic)
+                tableView.deleteRows(at: [indexPath], with: .top)
+                tableView.reloadData()
             }
                                             
             alert.addAction(cancel)
@@ -71,6 +70,7 @@ class MainTableViewController: UITableViewController {
             
             self.present(alert, animated: true)
         }
+        
         return [deleteAction]
     }
 
