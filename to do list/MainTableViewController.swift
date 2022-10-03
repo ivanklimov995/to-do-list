@@ -8,27 +8,59 @@
 import UIKit
 import RealmSwift
 
-class MainTableViewController: UITableViewController {
+class MainTableViewController: UITableViewController, UISearchResultsUpdating {
     
     var notesArray: Results<Notes>!
+    var arrayForShow: Results<Notes>!
     
     //MARK: все для показа избранных заметок
     @IBOutlet weak var favoritesOutlet: UIBarButtonItem!
     var isShowFavorites = false
     var favoritesArray: Results<Notes>!
-    var arrayForShow: Results<Notes>!
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
         notesArray = realm.objects(Notes.self)
+        searshController.searchResultsUpdater = self
+        searshController.obscuresBackgroundDuringPresentation = false
+        searshController.searchBar.placeholder = "Поиск"
+        tableView.tableHeaderView = searshController.searchBar // интеграция строки поиска в тейбл вью
+        definesPresentationContext = true  // отпустить сроку поиска при переходе на другой экран
     }
 
+    
+    
+    //MARK: search bar
+    private let searshController = UISearchController(searchResultsController: nil)
+    private var filtredNotes: Results<Notes>!
+    private var searchBarIsEmpty: Bool {
+        guard let text = searshController.searchBar.text else { return false }
+        return text.isEmpty
+    }
+    private var isFiltering: Bool{
+        return searshController.isActive && !searchBarIsEmpty
+    }
+    private var ascendingSorting = true // cорт по возрастанию
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        filtredNotes = notesArray.filter("text CONTAINS[cd] %@", searchController.searchBar.text!) 
+        tableView.reloadData()
+    }
+
+    
+    
+    
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isShowFavorites{
             return favoritesArray.count
         }else{
-            return notesArray.isEmpty ? 0 : notesArray.count
+            if isFiltering {
+                return filtredNotes.count
+            }else {
+                return notesArray.isEmpty ? 0 : notesArray.count
+            }
         }
     }
 
@@ -37,8 +69,15 @@ class MainTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomCell
         if isShowFavorites{
                 arrayForShow = favoritesArray
-            }else{
+            self.searshController.searchBar.isHidden = true
+        }else{
+            if isFiltering{
+                arrayForShow = filtredNotes
+                self.searshController.searchBar.isHidden = false
+            } else{
                 arrayForShow = notesArray
+                self.searshController.searchBar.isHidden = false
+            }
         }
         
             if arrayForShow[indexPath.row].isFavorites {
