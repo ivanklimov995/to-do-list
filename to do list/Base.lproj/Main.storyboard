@@ -82,24 +82,6 @@
                                 <action selector="buttonFavoritesAction:" destination="uLi-rx-A7c" id="YQJ-vB-iXk"/>
                             </connections>
                         </barButtonItem>
-                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="ACP-BH-jpe">
-                            <rect key="frame" x="189.33333333333334" y="5" width="86.666666666666657" height="34.333333333333336"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.76000000000000001" alpha="1" colorSpace="calibratedWhite"/>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain">
-                                <attributedString key="attributedTitle">
-                                    <fragment content="Сортировка">
-                                        <attributes>
-                                            <font key="NSFont" size="11" name="Helvetica"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                            </buttonConfiguration>
-                            <connections>
-                                <action selector="sortedButton:" destination="uLi-rx-A7c" eventType="touchUpInside" id="1wi-uh-wng"/>
-                            </connections>
-                        </button>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="0SG-f3-Zi6">
                                 <connections>
@@ -108,7 +90,7 @@
                             </barButtonItem>
                             <barButtonItem width="50" style="plain" id="mol-FQ-I5T">
                                 <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="QjV-At-g36">
-                                    <rect key="frame" x="295" y="5" width="37" height="34.333333333333336"/>
+                                    <rect key="frame" x="268" y="4.6666666666666679" width="64" height="34.666666666666657"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" title="Button"/>
                                     <buttonConfiguration key="configuration" style="plain" title="↑"/>
@@ -116,6 +98,11 @@
                                         <action selector="variandSortedAction:" destination="uLi-rx-A7c" eventType="touchUpInside" id="fdx-hK-Z2x"/>
                                     </connections>
                                 </button>
+                            </barButtonItem>
+                            <barButtonItem title="Item" image="line.3.horizontal.decrease" catalog="system" id="v9Z-2X-POo">
+                                <connections>
+                                    <action selector="sortedButton:" destination="uLi-rx-A7c" id="Tmd-p4-ZLl"/>
+                                </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
@@ -203,6 +190,7 @@
         <segue reference="ZlY-UY-lhd"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="line.3.horizontal.decrease" catalog="system" width="128" height="73"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

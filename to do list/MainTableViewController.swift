@@ -80,7 +80,7 @@ class MainTableViewController: UITableViewController, UISearchResultsUpdating {
         self.tableView.reloadData()
     }
     
-    @IBAction func sortedButton(_ sender: UIButton) {
+    @IBAction func sortedButton(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "Сортировать", message: nil, preferredStyle: .actionSheet)
         let byName = UIAlertAction(title: "По имени", style: .default) { [self] _ in
             sorting(byKeyPath: "text")
