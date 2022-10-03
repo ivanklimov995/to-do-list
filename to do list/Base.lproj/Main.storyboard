@@ -82,7 +82,7 @@
                                 <action selector="buttonFavoritesAction:" destination="uLi-rx-A7c" id="YQJ-vB-iXk"/>
                             </connections>
                         </barButtonItem>
-                        <button key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="ACP-BH-jpe">
+                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="ACP-BH-jpe">
                             <rect key="frame" x="189.33333333333334" y="5" width="86.666666666666657" height="34.333333333333336"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.76000000000000001" alpha="1" colorSpace="calibratedWhite"/>
@@ -107,22 +107,22 @@
                                 </connections>
                             </barButtonItem>
                             <barButtonItem width="50" style="plain" id="mol-FQ-I5T">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="QjV-At-g36">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="QjV-At-g36">
                                     <rect key="frame" x="295" y="5" width="37" height="34.333333333333336"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" title="Button"/>
                                     <buttonConfiguration key="configuration" style="plain" title="↑"/>
+                                    <connections>
+                                        <action selector="variandSortedAction:" destination="uLi-rx-A7c" eventType="touchUpInside" id="fdx-hK-Z2x"/>
+                                    </connections>
                                 </button>
-                                <connections>
-                                    <action selector="variandSortedAction:" destination="uLi-rx-A7c" id="pim-0V-T35"/>
-                                </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="favoritesOutlet" destination="JrJ-Q1-N2H" id="QIg-Kx-LEm"/>
-                        <outlet property="variandSortedOutlet" destination="mol-FQ-I5T" id="8nj-pv-ez5"/>
+                        <outlet property="variandSortedOutlet" destination="QjV-At-g36" id="Eh2-TN-yTV"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vgh-a1-awX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
