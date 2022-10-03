@@ -44,7 +44,7 @@ class MainTableViewController: UITableViewController, UISearchResultsUpdating {
     private var ascendingSorting = true // cорт по возрастанию
     
     func updateSearchResults(for searchController: UISearchController) {
-        filtredNotes = notesArray.filter("text CONTAINS[cd] %@", searchController.searchBar.text!) 
+        filtredNotes = arrayForShow.filter("text CONTAINS[cd] %@", searchController.searchBar.text!)
         tableView.reloadData()
     }
 
@@ -54,7 +54,11 @@ class MainTableViewController: UITableViewController, UISearchResultsUpdating {
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isShowFavorites{
-            return favoritesArray.count
+            if isFiltering {
+                return filtredNotes.count
+            }else {
+                return favoritesArray.count
+            }
         }else{
             if isFiltering {
                 return filtredNotes.count
@@ -68,15 +72,16 @@ class MainTableViewController: UITableViewController, UISearchResultsUpdating {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomCell
         if isShowFavorites{
+            if isFiltering{
+                arrayForShow = filtredNotes
+            } else{
                 arrayForShow = favoritesArray
-            self.searshController.searchBar.isHidden = true
+            }
         }else{
             if isFiltering{
                 arrayForShow = filtredNotes
-                self.searshController.searchBar.isHidden = false
             } else{
                 arrayForShow = notesArray
-                self.searshController.searchBar.isHidden = false
             }
         }
         
