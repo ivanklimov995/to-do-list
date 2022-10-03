@@ -27,6 +27,8 @@ class MainTableViewController: UITableViewController, UISearchResultsUpdating {
         searshController.searchBar.placeholder = "Поиск"
         tableView.tableHeaderView = searshController.searchBar // интеграция строки поиска в тейбл вью
         definesPresentationContext = true  // отпустить сроку поиска при переходе на другой экран
+        
+        setupVariantSorting(ascendingSorting: ascendingSorting)
     }
 
     
@@ -41,14 +43,54 @@ class MainTableViewController: UITableViewController, UISearchResultsUpdating {
     private var isFiltering: Bool{
         return searshController.isActive && !searchBarIsEmpty
     }
-    private var ascendingSorting = true // cорт по возрастанию
     
     func updateSearchResults(for searchController: UISearchController) {
-        filtredNotes = arrayForShow.filter("text CONTAINS[cd] %@", searchController.searchBar.text!)
-        tableView.reloadData()
+        if !notesArray.isEmpty{
+            filtredNotes = arrayForShow.filter("text CONTAINS[cd] %@", searchController.searchBar.text!)
+            tableView.reloadData()
+        }else {
+            return
+        }
+      
+        
     }
 
+    //MARK: sorted
+    @IBOutlet weak var variandSortedOutlet: UIBarButtonItem!
+    private var ascendingSorting = false // cорт по возрастанию
+    private func setupVariantSorting(ascendingSorting: Bool){
+        if ascendingSorting {
+            variandSortedOutlet.title = "↑"
+        } else {
+            variandSortedOutlet.title = "qfasfasfaf↓"
+        }
+    }
+    private var isSorted = false
+    private var sortedArray: Results<Notes>!
     
+    @IBAction func variandSortedAction(_ sender: UIBarButtonItem) {
+        ascendingSorting.toggle()
+        setupVariantSorting(ascendingSorting: ascendingSorting)
+        self.tableView.reloadData()
+    }
+    
+    @IBAction func sortedButton(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Сортировать", message: nil, preferredStyle: .actionSheet)
+        let byName = UIAlertAction(title: "По имени", style: .default) { _ in
+            self.notesArray =  self.notesArray.sorted(byKeyPath: "text", ascending: self.ascendingSorting)
+            self.tableView.reloadData()
+      }
+                              
+        let byDate = UIAlertAction(title: "По дате", style: .default) { _ in
+                self.notesArray =  self.notesArray.sorted(byKeyPath: "date", ascending: self.ascendingSorting)
+                self.tableView.reloadData()
+        }
+        let cancel = UIAlertAction(title: "Отмена", style: .destructive)
+        alert.addAction(byName)
+        alert.addAction(byDate)
+        alert.addAction(cancel)
+        present(alert, animated: true)
+    }
     
     
     // MARK: - Table view data source

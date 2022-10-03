@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ViewController: UIViewController, UITextViewDelegate {
 
@@ -41,5 +42,4 @@ class ViewController: UIViewController, UITextViewDelegate {
             favoritesOutlet.tintColor = UIColor.blue
         }
     }
-    
 }
