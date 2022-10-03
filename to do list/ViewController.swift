@@ -8,9 +8,11 @@
 import UIKit
 
 class ViewController: UIViewController, UITextViewDelegate {
-//добавить кнопку, чтоб при создании заметки ее сразу можно было добавить в избранное
-    
+
+    @IBOutlet weak var favoritesOutlet: UIBarButtonItem!
     @IBOutlet weak var textView: UITextView!
+    
+    var isFavorites = false
     var text = "Введите заметку"
     var addNotes = true
     var index: Int?
@@ -30,4 +32,14 @@ class ViewController: UIViewController, UITextViewDelegate {
             textView.textColor = UIColor.black
         }
     }
+    
+    @IBAction func favoritesButton(_ sender: UIBarButtonItem) {
+        isFavorites.toggle()
+        if isFavorites {
+            favoritesOutlet.tintColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        }else {
+            favoritesOutlet.tintColor = UIColor.blue
+        }
+    }
+    
 }

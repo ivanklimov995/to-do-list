@@ -129,7 +129,9 @@ class MainTableViewController: UITableViewController {
             if newNotes.textView.text != nil && newNotes.textView.text != newNotes.text {
                 if newNotes.addNotes{
                     DispatchQueue.main.async {
-                        StoragemManager.saveObject(Notes(text: newNotes.textView.text!))
+                        let note = Notes(text: newNotes.textView.text!)
+                        note.isFavorites = newNotes.isFavorites
+                        StoragemManager.saveObject(note)
                         self.tableView.reloadData() // нужен именно тут - чтобы обновил таблицу после записи и отобразилась новая заметка
                     }
                 }else{
@@ -137,6 +139,7 @@ class MainTableViewController: UITableViewController {
                         DispatchQueue.main.async {
                             try! realm.write({
                                 self.notesArray[newNotes.index!].text = newNotes.textView.text!
+                                self.notesArray[newNotes.index!].isFavorites = newNotes.isFavorites
                                 self.tableView.reloadData()
                             })
                         }

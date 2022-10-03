@@ -115,13 +115,21 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="hXo-73-iJy">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="UEO-cy-Uww">
-                            <connections>
-                                <segue destination="0PX-Ca-kQU" kind="unwind" unwindAction="unwingSegue:" id="3d7-sZ-iQz"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="save" id="UEO-cy-Uww">
+                                <connections>
+                                    <segue destination="0PX-Ca-kQU" kind="unwind" unwindAction="unwingSegue:" id="3d7-sZ-iQz"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="star.fill" catalog="system" id="XL2-Jv-osY">
+                                <connections>
+                                    <action selector="favoritesButton:" destination="NoL-8e-tFF" id="7iF-Ne-ecS"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="favoritesOutlet" destination="XL2-Jv-osY" id="GGD-Ic-iaL"/>
                         <outlet property="textView" destination="DAi-kF-YHI" id="IKS-Gs-4uy"/>
                     </connections>
                 </viewController>
