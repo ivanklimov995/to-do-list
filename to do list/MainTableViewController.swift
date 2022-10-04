@@ -44,6 +44,7 @@ class MainTableViewController: UITableViewController, UISearchResultsUpdating {
     }
     
     func updateSearchResults(for searchController: UISearchController) {
+        
         if !notesArray.isEmpty{
             filtredNotes = arrayForShow.filter("text CONTAINS[cd] %@", searchController.searchBar.text!)
             tableView.reloadData()
